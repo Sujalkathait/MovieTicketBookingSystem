@@ -32,9 +32,23 @@ The code is broken down into small, modular files to ensure it is easy to read a
 
 ## 4. How to Run the Code
 
-To run this program, just double click the `MovieTicketBooking.exe` file in the folder!
+To run this program, open your terminal (e.g., inside VS Code) in the `MovieTicketBookingSystem/` folder and compile the code using `g++`:
 
-*(If you want to compile it yourself, type `g++ main1.cpp -o MovieTicketBooking.exe` in your terminal).*
+```bash
+g++ main1.cpp -o MovieTicketBooking
+```
+
+Once compiled, you can start the program from the terminal based on your operating system:
+
+**On Windows:**
+```powershell
+.\MovieTicketBooking.exe
+```
+
+**On MacOS / Linux:**
+```bash
+./MovieTicketBooking
+```
 
 ---
 
