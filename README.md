@@ -1,37 +1,70 @@
 # Movie Ticket Booking System
 
-Welcome to the Movie Ticket Booking System! This is a simple C++ program that lets you book movie tickets, just like you would at a real cinema.
+## 1. What is this Project?
+Welcome to the Movie Ticket Booking System! This is an in-memory Console Application built in C++ that simulates a real-world cinema booking experience. It demonstrates Low-Level Design (LLD) principles, Object-Oriented Programming (OOP), and clean architecture by breaking down a complex system into manageable classes and services.
 
 ---
 
-## 1. What does this project do?
-
-With this app, you can:
-- **See Movies:** Look at which movies are playing.
-- **Pick Seats:** See a live seating chart and pick your seats.
-- **Pay:** Choose to pay with UPI, Card, or Cash.
-- **Get a Ticket:** After paying, you get a printed ticket with your name and booking ID.
-- **Cancel Tickets:** If you change your mind, you can cancel your booking and get a refund.
-- **Search Tickets:** You can find your past tickets using your phone number or booking ID.
-
----
-
-## 2. Project Files
-
-The code is broken down into small, simple files so it's easy to read:
-- `main1.cpp`: Starts the app and shows the main menu.
-- `movie2.cpp`: Stores movie details (like title and language).
-- `seat3.cpp` & `screen4.cpp`: Manages the cinema screens and seats.
-- `cinema5.cpp`, `show7.cpp`, `showSeat6.cpp`: Connects movies to screens and tracks which seats are booked.
-- `bookingService9.cpp`: The main logic that handles bookings and cancellations.
-- `customer10.cpp`: Stores the customer's name and phone number.
-- `payment11.cpp` to `cashPayment14.cpp`: Handles different payment methods.
+## 2. What does it do?
+With this application, you can perform all the core functions of a movie theater:
+- **Browse Movies:** View a list of all currently playing movies and their details (language, duration).
+- **Select Shows:** Pick a specific screen and time for your chosen movie.
+- **Pick Seats:** View a live, formatted seating chart (Silver, Gold, Platinum) and select available seats.
+- **Pay:** Process payments securely via simulated UPI, Card, or Cash methods.
+- **Get a Ticket:** Receive a fully formatted ticket receipt containing your unique Booking ID, customer details, and seat numbers.
+- **Cancel Tickets:** Look up an existing booking and cancel it to automatically release the seats back to the public and issue a refund.
+- **Search Tickets:** Retrieve past bookings at any time using your phone number or unique Booking ID.
 
 ---
 
-## 3. How the System Works
+## 3. Project Files Explained
+The code is broken down into small, modular files to ensure it is easy to read and maintain. Each file has a single responsibility:
+- `main1.cpp`: The entry point. It initializes the cinema, screens, seats, movies, and starts the main menu.
+- `movie2.cpp`: Defines the `Movie` class (stores title, language, duration).
+- `seat3.cpp` & `screen4.cpp`: Manages the physical layout of the cinema, including seat numbers and categories (Silver, Gold, Platinum).
+- `cinema5.cpp`, `showSeat6.cpp`, `show7.cpp`: Connects movies to screens at specific times and tracks the real-time availability of individual seats.
+- `priceCalculator8.cpp`: Dynamically calculates the total price based on the category of the selected seats.
+- `bookingService9.cpp`: The brain of the application. It handles the entire booking flow, manages the list of all tickets, processes cancellations, and handles user input.
+- `customer10.cpp`: Stores the customer's personal details (Name and Phone Number).
+- `payment11.cpp` to `cashPayment14.cpp`: Implements a polymorphic payment system that handles UPI, Card, and Cash transactions.
 
-This diagram shows how a user uses the system from start to finish.
+---
+
+## 4. How to Run the Code
+
+To run this program, open your terminal in the `MovieTicketBookingSystem/` folder and compile the code using `g++`. (All dependencies are included via `#include` within the files).
+
+```bash
+g++ main1.cpp -o MovieTicketBooking.exe
+```
+
+Then, start the program:
+
+**On Windows:**
+```powershell
+.\MovieTicketBooking.exe
+```
+
+**On Mac or Linux:**
+```bash
+./MovieTicketBooking.exe
+```
+
+---
+
+## 5. Error Handling
+The application is robust and designed to prevent crashes from bad user input:
+- **Invalid Inputs:** If you accidentally type letters instead of numbers in menus, the system safely catches the error, clears the input buffer, and asks you again without crashing.
+- **Invalid Booking IDs:** If you try to look up or cancel a booking that doesn't exist (or was already cancelled), the system will notify you safely.
+- **Seat Validation:** The system prevents you from booking a seat that doesn't exist, booking a seat that is already taken, or entering duplicate seats in the same transaction.
+- **Payment Failures:** If you abort the payment process halfway through, the transaction is rolled back and your selected seats are immediately freed up for other users.
+
+---
+
+## 6. System Diagrams
+
+### 6.1 End-to-End System Workflow
+This flowchart shows how a user interacts with the system from start to finish.
 
 ```mermaid
 flowchart TD
@@ -104,48 +137,12 @@ flowchart TD
     M1 -->|0 - Exit| ExitApp([Exit App])
 ```
 
----
-
-## 4. Sequence Diagrams
-
-### 4.1 UPI Payment Steps
-This image shows what happens behind the scenes when a customer pays using UPI.
+### 6.2 UPI Payment Sequence Diagram
+This image shows the interaction logic when a customer pays using UPI.
 
 ![Cinema Booking UPI Sequence Diagram](MovieTicketBookingSystem%20image/Cinema_Booking_UPI_Sequence_Diagram.png)
 
-### 4.2 System Architecture
-This image shows how the different parts of the code talk to each other.
+### 6.3 System Architecture
+This image outlines the object-oriented architectural relationships in the codebase.
 
 ![Architecture Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
-
----
-
-## 5. How to Run the Code
-
-To run this program, open your terminal in the `MovieTicketBookingSystem/` folder and type:
-
-```bash
-g++ main1.cpp
-```
-
-Then, start the program:
-
-**On Windows:**
-```powershell
-.\a.exe
-```
-
-**On Mac or Linux:**
-```bash
-./a.out
-```
-
----
-
-## 6. Error Handling
-
-The app is smart and won't crash if you make a mistake:
-- **Wrong Seat:** If you type a seat that doesn't exist, it will tell you and let you try again.
-- **Taken Seat:** If a seat is already booked, it won't let you book it again.
-- **Payment Failed:** If you cancel your payment halfway, the seats are freed up for someone else.
-- **Wrong Menu Option:** If you type letters instead of numbers, it will simply ask you again.
