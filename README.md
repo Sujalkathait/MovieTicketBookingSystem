@@ -569,7 +569,7 @@ Then, start the program:
 
 **On Windows:**
 ```powershell
-..exe
+.\a.exe
 ```
 
 **On Mac or Linux:**
