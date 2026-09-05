@@ -557,83 +557,27 @@ sequenceDiagram
 
   
 
-## 10. Compilation and Execution Guide
+## 10. How to Run the Code
 
-  
-
-### Prerequisites
-
-- Any standard C++ compiler supporting C++11 or higher (`g++`, `clang++`, or MSVC).
-
-- Works out-of-the-box on **Windows**, **Linux**, and **macOS**.
-
-  
-
-### Compilation Command
-
-  
-
-Open your terminal or command prompt inside the `MovieTicketBookingSystem/` directory:
-
-  
+To run this program, open your terminal in the `MovieTicketBookingSystem/` folder and type:
 
 ```bash
-
-g++ -Wall -Wextra main1.cpp -o MovieTicketBooking.exe
-
+g++ main1.cpp
 ```
 
-  
+Then, start the program:
 
-> [!NOTE]
-
-> All modular files (`movie2.cpp`, `seat3.cpp`, `screen4.cpp`, `cinema5.cpp`, `showSeat6.cpp`, `show7.cpp`, `priceCalculator8.cpp`, `bookingService9.cpp`, `customer10.cpp`, `payment11.cpp`, `upiPayment12.cpp`, `cardPayment13.cpp`, `cashPayment14.cpp`) are included with include guards in `main1.cpp`. Compiling `main1.cpp` compiles the entire modular system cleanly with zero warnings.
-
-  
-
----
-
-  
-
-### Running the Application
-
-  
-
-#### Windows Command Prompt (CMD)
-
-```cmd
-
-MovieTicketBooking.exe
-
-```
-
-  
-
-#### Windows PowerShell
-
+**On Windows:**
 ```powershell
-
-.\MovieTicketBooking.exe
-
+..exe
 ```
 
-  
-
-#### Linux / macOS
-
+**On Mac or Linux:**
 ```bash
-
-g++ -Wall -Wextra -std=c++17 main1.cpp -o MovieTicketBooking
-
-./MovieTicketBooking
-
+./a.out
 ```
-
-  
 
 ---
-
-  
 
 ## 11. Input Validation & Edge Case Handling Matrix
 
