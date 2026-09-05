@@ -114,30 +114,29 @@ The system provides end-to-end cinema management operations:
 
 The project follows **modular programming principles**, with each class and responsibility organized into its own dedicated source file.
 
-| Directory / File                        | Description                                                                      |
-| :-------------------------------------- | :------------------------------------------------------------------------------- |
-| `main1.cpp`                             | Entry point: initializes the cinema, seeds demo data, and launches the main menu |
-| `movie2.cpp`                            | Movie entity: ID, title, language, and duration                                  |
-| `seat3.cpp`                             | Physical Seat entity: seat number and seat type                                  |
-| `screen4.cpp`                           | Screen entity: screen ID, name, and seat composition                             |
-| `cinema5.cpp`                           | Cinema entity: cinema name, screens, and movie catalog                           |
-| `showSeat6.cpp`                         | Show-seat status tracker: `AVAILABLE` / `BOOKED`                                 |
-| `show7.cpp`                             | Show entity: movie, screen, show time, and seat layout                           |
-| `priceCalculator8.cpp`                  | Price calculation engine: tier-based pricing and totals                          |
-| `bookingService9.cpp`                   | Booking orchestrator: reservations, tickets, cancellations, and rollback         |
-| `customer10.cpp`                        | Customer entity: name, phone number, and validation                              |
-| `payment11.cpp`                         | Abstract `Payment` base class for polymorphic payments                           |
-| `upiPayment12.cpp`                      | `UpiPayment` implementation: UPI validation and payment processing               |
-| `cardPayment13.cpp`                     | `CardPayment` implementation: card processing and masking                        |
-| `cashPayment14.cpp`                     | `CashPayment` implementation: cash payment and receipt generation                |
-| `MovieTicketBookingSystem assignment/`  | Academic assignment prompt and specification documents                           |
-| `MovieTicketBookingSystem pdf/`         | System Design documentation and analysis PDFs                                    |
-| `MovieTicketBookingSystem image/`       | UML and system-design diagram images                                             |
-| `MovieTicketBookingSystem screenshots/` | Application execution screenshots                                                |
-| `README.md`                             | Main project documentation and usage information                                 |
-  
+| Directory / File                       | Description                                                                      |
+| :------------------------------------- | :------------------------------------------------------------------------------- |
+| `main1.cpp`                            | Entry point: initializes the cinema, seeds demo data, and launches the main menu |
+| `movie2.cpp`                           | Movie entity: ID, title, language, and duration                                  |
+| `seat3.cpp`                            | Physical Seat entity: seat number and seat type                                  |
+| `screen4.cpp`                          | Screen entity: screen ID, name, and seat composition                             |
+| `cinema5.cpp`                          | Cinema entity: cinema name, screens, and movie catalog                           |
+| `showSeat6.cpp`                        | Show-seat status tracker: `AVAILABLE` / `BOOKED`                                 |
+| `show7.cpp`                            | Show entity: movie, screen, show time, and seat layout                           |
+| `priceCalculator8.cpp`                 | Price calculation engine: tier-based pricing and totals                          |
+| `bookingService9.cpp`                  | Booking orchestrator: reservations, tickets, cancellations, and rollback         |
+| `customer10.cpp`                       | Customer entity: name, phone number, and validation                              |
+| `payment11.cpp`                        | Abstract `Payment` base class for polymorphic payments                           |
+| `upiPayment12.cpp`                     | `UpiPayment` implementation: UPI validation and payment processing               |
+| `cardPayment13.cpp`                    | `CardPayment` implementation: card processing and masking                        |
+| `cashPayment14.cpp`                    | `CashPayment` implementation: cash payment and receipt generation                |
+| `MovieTicketBookingSystem assignment/` | Academic assignment prompt and specification documents                           |
+| `MovieTicketBookingSystem pdf/`        | System Design documentation and analysis PDFs                                    |
+| `MovieTicketBookingSystem image/`      | UML and system-design diagram images                                             |
+| `README.md`                            | Main project documentation and usage information                                 |
 
 ---
+  
 
   
 
@@ -403,110 +402,110 @@ The relationships, multiplicities, and lifecycle dependencies are visually illus
 
   
 
-## 8. End-to-End System Workflow
+ ## 8. End-to-End System Workflow
 
-This diagram shows how a user uses the system from start to finish.
+The end-to-end workflow describes the complete interaction between the customer and the Cinema Ticket Booking System, from application startup and movie selection to seat booking, payment, ticket generation, ticket lookup, cancellation, and system exit.
 
 ```mermaid
 flowchart TD
+
     Start([User Starts System]) --> Menu[Main Menu]
 
     Menu --> M1{Select Option}
 
-    M1 -->|1 - Movies| ShowMovies[Show Available Movies & Shows]
+    M1 -->|1 - Movies| ShowMovies["Show Available Movies & Shows"]
     ShowMovies --> Menu
 
-    M1 -->|2 - Book Ticket| SelectMovie[Select Movie & Show]
-    SelectMovie --> Layout[Show Live Seat Layout]
+    M1 -->|2 - Book Ticket| SelectMovie["Select Movie & Show"]
+    SelectMovie --> Layout["Show Live Seat Layout"]
 
-    Layout --> PickSeats[Enter Seats (e.g., A1, B2)]
-    PickSeats --> Validate{Are Seats Valid & Available?}
+    Layout --> PickSeats["Enter Seats (e.g., A1, B2)"]
+    PickSeats --> Validate{"Are Seats Valid & Available?"}
 
-    Validate -->|No| ShowError[Show Seat Error]
+    Validate -->|No| ShowError["Show Seat Error"]
     ShowError --> Layout
 
-    Validate -->|Yes| CalcPrice[Calculate Ticket Price]
+    Validate -->|Yes| CalcPrice["Calculate Ticket Price"]
 
-    CalcPrice --> CustInfo[Enter Customer Details (Name & Phone)]
-    CustInfo --> SelectPay[Select Payment Method]
+    CalcPrice --> CustInfo["Enter Customer Details (Name & Phone)"]
+    CustInfo --> SelectPay["Select Payment Method"]
 
-    SelectPay --> PayMode{Payment Method}
+    SelectPay --> PayMode{Payment Mode}
 
     PayMode -->|1 - UPI| UPIPay[Process UPI Payment]
     PayMode -->|2 - Card| CardPay[Process Card Payment]
-    PayMode -->|3 - Cash| CashPay[Process Cash Payment]
-    PayMode -->|0 - Decline| Rollback[Cancel and Free Selected Seats]
+    PayMode -->|3 - Cash| CashPay["Process Cash Payment"]
+    PayMode -->|0 - Decline| Rollback["Cancel and Free Selected Seats"]
 
-    UPIPay --> PayCheck{Payment Successful?}
+    UPIPay --> PayCheck{"Payment Successful?"}
     CardPay --> PayCheck
     CashPay --> PayCheck
 
     PayCheck -->|No| Rollback
-    PayCheck -->|Yes| Confirm[Confirm Booking and Mark Seats as BOOKED]
+    PayCheck -->|Yes| Confirm["Confirm Booking and Mark Seats as BOOKED"]
 
-    Confirm --> GenTicket[Create Booking ID (e.g., BK1001)]
-    GenTicket --> PrintTicket[Print Ticket]
+    Confirm --> GenTicket["Create Booking ID (e.g., BK1001)"]
+    GenTicket --> PrintTicket[Print Formatted Ticket]
     PrintTicket --> Menu
 
     Rollback --> Menu
 
-    M1 -->|3 - Cancel Ticket| CancelPrompt[Enter Booking ID]
-    CancelPrompt --> FindBooking{Is Booking Found?}
+    M1 -->|3 - Cancel Ticket| CancelPrompt["Enter Booking ID"]
+    CancelPrompt --> FindBooking{"Is Booking Found?"}
 
-    FindBooking -->|No| CancelErr[Show Booking Not Found Error]
+    FindBooking -->|No| CancelErr["Show Booking Not Found Error"]
     CancelErr --> Menu
 
-    FindBooking -->|Yes| ConfirmCancel{Confirm Cancellation?}
+    FindBooking -->|Yes| ConfirmCancel{"Confirm Cancellation?"}
 
-    ConfirmCancel -->|No| Abort[Stop Cancellation]
+    ConfirmCancel -->|No| Abort["Stop Cancellation"]
     Abort --> Menu
 
-    ConfirmCancel -->|Yes| CancelBooking[Cancel Booking]
-    CancelBooking --> Refund[Issue Full Refund]
-    Refund --> Release[Free Seats and Update Status to CANCELLED]
+    ConfirmCancel -->|Yes| CancelBooking["Cancel Booking"]
+    CancelBooking --> Refund["Issue Full Refund"]
+    Refund --> Release["Free Seats and Update Status to CANCELLED"]
     Release --> Menu
 
-    M1 -->|4 - My Tickets| Lookup[Enter Booking ID or Phone Number]
-    Lookup --> Search{Is Booking Found?}
+    M1 -->|4 - My Tickets| Lookup["Enter Booking ID or Phone Number"]
+    Lookup --> Search{"Is Booking Found?"}
 
-    Search -->|Yes| ShowTicket[Show Ticket]
+    Search -->|Yes| ShowTicket[Display Confirmed / Cancelled Ticket]
     ShowTicket --> Menu
 
-    Search -->|No| NotFound[Show: No Tickets Found]
+    Search -->|No| NotFound[Display: No Tickets Found]
     NotFound --> Menu
 
-    M1 -->|0 - Exit| ExitApp([Exit App])
+    M1 -->|0 - Exit| ExitApp([Cleanly Exit Application])
 ```
 
 ---
 
-## 9. Sequence Diagrams (Booking & Payment)
-
-These diagrams show the step-by-step process of booking a ticket and making a payment.
+## 9. Sequence Diagrams (Booking & Payment Flow)
 
 ### 9.1 UML Sequence Diagram: Book Seats & Pay via UPI
 
-This diagram shows the exact steps when a customer books seats and pays using UPI.
+The diagram below illustrates the chronological interaction between the customer, booking service, show, seats, price calculator, payment component, and booking entity for the primary use case: **“Customer Books Seats and Pays via UPI.”**
 
 ![Cinema Booking UPI Sequence Diagram](MovieTicketBookingSystem%20image/Cinema_Booking_UPI_Sequence_Diagram.png)
 
 ---
 
-### 9.2 Architecture Sequence Diagram
+### 9.2 Architectural Interaction Sequence Diagram
 
-This diagram shows how different parts of the system talk to each other to process a booking.
+The architectural sequence diagram illustrates the request–response flow between the major system components. It shows the participating lifelines, activation bars, and synchronous method calls involved in processing the booking and payment request.
 
-![Architecture Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
+![Architectural Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
 
 ---
 
-### 9.3 Code Sequence Diagram
+### 9.3 Interactive Mermaid Sequence Diagram
 
-This diagram shows the exact code steps happening in the background.
+The following Mermaid sequence diagram illustrates the runtime interaction and method-call flow for a successful booking in which the customer selects seats and pays via UPI.
 
 ```mermaid
 sequenceDiagram
     autonumber
+
     actor User as Customer
     participant BS as BookingService
     participant S as Show
@@ -514,39 +513,49 @@ sequenceDiagram
     participant PC as PriceCalculator
     participant PM as Payment (UPI/Card/Cash)
     participant B as Booking
-    
+
     User->>BS: Select Show & Enter Seats ("A1, B2")
-    BS->>S: findSeat("A1"), findSeat("B2")
-    S-->>BS: return ShowSeat pointers
+
+    BS->>S: findSeat("A1")
+    S-->>BS: Return ShowSeat pointer
+
+    BS->>S: findSeat("B2")
+    S-->>BS: Return ShowSeat pointer
+
     BS->>SS: isAvailable()
-    SS-->>BS: true (both seats available)
-    
+    SS-->>BS: true
+
     BS->>PC: calculateTotalPrice(selectedSeats)
-    PC-->>BS: return totalAmount (Rs. 400)
-    
-    BS->>User: Enter Customer Name
+    PC-->>BS: Return totalAmount (₹400)
+
+    BS->>User: Prompt for Customer Name
     User-->>BS: "Rahul Sharma"
-    BS->>User: Enter Phone Number
+
+    BS->>User: Prompt for Phone Number
     User-->>BS: "9876543210"
-    
-    BS->>User: Select Payment (1.UPI, 2.Card, 3.Cash)
+
+    BS->>User: Prompt for Payment Mode
     User-->>BS: Choice 1 (UPI)
-    
+
     BS->>PM: pay(400.0)
     PM-->>BS: true (Payment Confirmed)
-    
+
     loop For each selected seat
         BS->>SS: bookSeat()
         SS-->>SS: status = BOOKED
     end
-    
-    BS->>B: Create Booking(BK1001, Customer, Show, Seats, 400, "UPI")
-    B-->>BS: newBooking instance
+
+    BS->>B: Create Booking(BK1001, Customer, Show, Seats, ₹400, "UPI")
+    B-->>BS: Return Booking instance
+
     BS->>B: printTicket()
-    B-->>User: Show Ticket with Customer Details
+    B-->>User: Display Formatted Ticket
 ```
 
 ---
+
+
+  
 
 ## 10. Compilation and Execution Guide
 
