@@ -405,200 +405,148 @@ The relationships, multiplicities, and lifecycle dependencies are visually illus
 
 ## 8. End-to-End System Workflow
 
-  
+This diagram shows how a user uses the system from start to finish.
 
-
-  
-
----
-
-  
-
-## 9. Sequence Diagrams (Booking & Payment Flow)
-
-  flowchart TD
+```mermaid
+flowchart TD
     Start([User Starts System]) --> Menu[Main Menu]
 
     Menu --> M1{Select Option}
 
-    M1 -->|1 - Movies| ShowMovies[Display Available Movies & Scheduled Shows]
+    M1 -->|1 - Movies| ShowMovies[Show Available Movies & Shows]
     ShowMovies --> Menu
 
-    M1 -->|2 - Book Ticket| SelectMovie[Select Movie & Scheduled Show]
-    SelectMovie --> Layout[Display Live Visual Seat Layout]
+    M1 -->|2 - Book Ticket| SelectMovie[Select Movie & Show]
+    SelectMovie --> Layout[Show Live Seat Layout]
 
-    Layout --> PickSeats[Enter Seats<br/>Example: A1, B2]
-    PickSeats --> Validate{Seats Valid,<br/>Available & Unique?}
+    Layout --> PickSeats[Enter Seats (e.g., A1, B2)]
+    PickSeats --> Validate{Are Seats Valid & Available?}
 
-    Validate -->|No| ShowError[Display Seat Validation Error]
+    Validate -->|No| ShowError[Show Seat Error]
     ShowError --> Layout
 
-    Validate -->|Yes| CalcPrice[Calculate Ticket Price<br/>Silver ₹150 / Gold ₹250 / Platinum ₹400]
+    Validate -->|Yes| CalcPrice[Calculate Ticket Price]
 
-    CalcPrice --> CustInfo[Enter Customer Details<br/>Full Name & Mobile Number]
-    CustInfo --> SelectPay[Select Payment Mode]
+    CalcPrice --> CustInfo[Enter Customer Details (Name & Phone)]
+    CustInfo --> SelectPay[Select Payment Method]
 
-    SelectPay --> PayMode{Payment Mode}
+    SelectPay --> PayMode{Payment Method}
 
     PayMode -->|1 - UPI| UPIPay[Process UPI Payment]
     PayMode -->|2 - Card| CardPay[Process Card Payment]
     PayMode -->|3 - Cash| CashPay[Process Cash Payment]
-    PayMode -->|0 - Decline| Rollback[Rollback Transaction<br/>Release Selected Seats]
+    PayMode -->|0 - Decline| Rollback[Cancel and Free Selected Seats]
 
     UPIPay --> PayCheck{Payment Successful?}
     CardPay --> PayCheck
     CashPay --> PayCheck
 
     PayCheck -->|No| Rollback
-    PayCheck -->|Yes| Confirm[Confirm Booking<br/>Mark Selected Seats as BOOKED]
+    PayCheck -->|Yes| Confirm[Confirm Booking and Mark Seats as BOOKED]
 
-    Confirm --> GenTicket[Generate Booking Record<br/>Example: BK1001]
-    GenTicket --> PrintTicket[Print Formatted Ticket]
+    Confirm --> GenTicket[Create Booking ID (e.g., BK1001)]
+    GenTicket --> PrintTicket[Print Ticket]
     PrintTicket --> Menu
 
     Rollback --> Menu
 
     M1 -->|3 - Cancel Ticket| CancelPrompt[Enter Booking ID]
-    CancelPrompt --> FindBooking{Active Booking Found?}
+    CancelPrompt --> FindBooking{Is Booking Found?}
 
-    FindBooking -->|No| CancelErr[Display Booking Not Found<br/>or Already Cancelled]
+    FindBooking -->|No| CancelErr[Show Booking Not Found Error]
     CancelErr --> Menu
 
     FindBooking -->|Yes| ConfirmCancel{Confirm Cancellation?}
 
-    ConfirmCancel -->|No| Abort[Cancellation Aborted]
+    ConfirmCancel -->|No| Abort[Stop Cancellation]
     Abort --> Menu
 
-    ConfirmCancel -->|Yes| CancelBooking[Process Cancellation]
+    ConfirmCancel -->|Yes| CancelBooking[Cancel Booking]
     CancelBooking --> Refund[Issue Full Refund]
-    Refund --> Release[Release Seats<br/>Update Status to CANCELLED]
+    Refund --> Release[Free Seats and Update Status to CANCELLED]
     Release --> Menu
 
     M1 -->|4 - My Tickets| Lookup[Enter Booking ID or Phone Number]
-    Lookup --> Search{Booking Found?}
+    Lookup --> Search{Is Booking Found?}
 
-    Search -->|Yes| ShowTicket[Display Confirmed / Cancelled Ticket]
+    Search -->|Yes| ShowTicket[Show Ticket]
     ShowTicket --> Menu
 
-    Search -->|No| NotFound[Display: No Tickets Found]
+    Search -->|No| NotFound[Show: No Tickets Found]
     NotFound --> Menu
 
-    M1 -->|0 - Exit| ExitApp([Cleanly Exit Application])
+    M1 -->|0 - Exit| ExitApp([Exit App])
+```
 
+---
 
-### 9.1 UML Sequence Diagram: Book Seats & Pay by UPI
+## 9. Sequence Diagrams (Booking & Payment)
 
-  
+These diagrams show the step-by-step process of booking a ticket and making a payment.
 
-The diagram below represents the exact chronological interaction between actors, services, and entities for the primary assignment use case: **"Customer books seats and pays via UPI"**:
+### 9.1 UML Sequence Diagram: Book Seats & Pay via UPI
 
-  
+This diagram shows the exact steps when a customer books seats and pays using UPI.
 
 ![Cinema Booking UPI Sequence Diagram](MovieTicketBookingSystem%20image/Cinema_Booking_UPI_Sequence_Diagram.png)
 
-  
+---
+
+### 9.2 Architecture Sequence Diagram
+
+This diagram shows how different parts of the system talk to each other to process a booking.
+
+![Architecture Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
 
 ---
 
-  
+### 9.3 Code Sequence Diagram
 
-### 9.2 Architectural Interaction Sequence Diagram
-
-  
-
-The architectural sequence model below maps out the request/response lifelines, activation bars, and synchronous method call chains:
-
-  
-
-![Architectural Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
-
-  
-
----
-
-  
-
-### 9.3 Interactive Mermaid Sequence Diagram
-
-  
-
-The interactive sequence diagram below maps out the runtime method dispatch:
-
-  
+This diagram shows the exact code steps happening in the background.
 
 ```mermaid
-
 sequenceDiagram
-
-    autonumber
-
-    actor User as Customer
-
-    participant BS as BookingService
-
-    participant S as Show
-
-    participant SS as ShowSeat
-
-    participant PC as PriceCalculator
-
-    participant PM as Payment (UPI/Card/Cash)
-
-    participant B as Booking
-
-    User->>BS: Select Show & Enter Seats ("A1, B2")
-
-    BS->>S: findSeat("A1"), findSeat("B2")
-
-    S-->>BS: return ShowSeat pointers
-
-    BS->>SS: isAvailable()
-
-    SS-->>BS: true (both seats available)
-
-    BS->>PC: calculateTotalPrice(selectedSeats)
-
-    PC-->>BS: return totalAmount (Rs. 400)
-
-    BS->>User: Prompt "Enter Customer Name"
-
-    User-->>BS: "Rahul Sharma"
-
-    BS->>User: Prompt "Enter Phone Number"
-
-    User-->>BS: "9876543210"
-
-    BS->>User: Prompt Payment Choice (1.UPI, 2.Card, 3.Cash)
-
-    User-->>BS: Choice 1 (UPI)
-
-    BS->>PM: pay(400.0)
-
-    PM-->>BS: true (Payment Confirmed)
-
-    loop For each selected seat
-
-        BS->>SS: bookSeat()
-
-        SS-->>SS: status = BOOKED
-
-    end
-
-    BS->>B: Create Booking(BK1001, Customer, Show, Seats, 400, "UPI")
-
-    B-->>BS: newBooking instance
-
-    BS->>B: printTicket()
-
-    B-->>User: Display Formatted Ticket with Customer Details
-
+    autonumber
+    actor User as Customer
+    participant BS as BookingService
+    participant S as Show
+    participant SS as ShowSeat
+    participant PC as PriceCalculator
+    participant PM as Payment (UPI/Card/Cash)
+    participant B as Booking
+    
+    User->>BS: Select Show & Enter Seats ("A1, B2")
+    BS->>S: findSeat("A1"), findSeat("B2")
+    S-->>BS: return ShowSeat pointers
+    BS->>SS: isAvailable()
+    SS-->>BS: true (both seats available)
+    
+    BS->>PC: calculateTotalPrice(selectedSeats)
+    PC-->>BS: return totalAmount (Rs. 400)
+    
+    BS->>User: Enter Customer Name
+    User-->>BS: "Rahul Sharma"
+    BS->>User: Enter Phone Number
+    User-->>BS: "9876543210"
+    
+    BS->>User: Select Payment (1.UPI, 2.Card, 3.Cash)
+    User-->>BS: Choice 1 (UPI)
+    
+    BS->>PM: pay(400.0)
+    PM-->>BS: true (Payment Confirmed)
+    
+    loop For each selected seat
+        BS->>SS: bookSeat()
+        SS-->>SS: status = BOOKED
+    end
+    
+    BS->>B: Create Booking(BK1001, Customer, Show, Seats, 400, "UPI")
+    B-->>BS: newBooking instance
+    BS->>B: printTicket()
+    B-->>User: Show Ticket with Customer Details
 ```
 
-  
-
 ---
-
-  
 
 ## 10. Compilation and Execution Guide
 
