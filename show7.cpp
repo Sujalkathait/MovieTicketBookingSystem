@@ -1,8 +1,8 @@
 #ifndef SHOW7_CPP
 #define SHOW7_CPP
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -13,124 +13,84 @@
 // Class: Show
 // Responsibility: Represents a movie show at a specific time and screen
 
-class Show
-{
+class Show {
 private:
-    int showId;
-    const Movie* movie;
-    Screen screen;
-    std::string showTime;
-    std::vector<ShowSeat> showSeats;
+  int showId;
+  const Movie *movie;
+  Screen screen;
+  std::string showTime;
+  std::vector<ShowSeat> showSeats;
 
 public:
+  // Constructor
+  Show(const Movie *m, const Screen &s, const std::string &time, int id)
+      : showId(id), movie(m), screen(s), showTime(time) {
+    for (const Seat &seat : screen.getSeats()) {
+      showSeats.push_back(Seat(seat));
+    }
+  }
 
-    // Constructor
-    Show(const Movie* m, const Screen& s, const std::string& time, int id)
-        : movie(m),
-          screen(s),
-          showTime(time),
-          showId(id)
-    {
-        for (const Seat& seat : screen.getSeats())
-        {
-            ShowSeat ss(seat);
-            showSeats.push_back(ss);
-        }
+  // Getters
+  int getShowId() const { return showId; }
+
+  const Movie &getMovie() const { return *movie; }
+
+  const Screen &getScreen() const { return screen; }
+
+  const std::string &getShowTime() const { return showTime; }
+
+  const std::vector<ShowSeat> &getShowSeats() const { return showSeats; }
+
+  std::vector<ShowSeat> &getShowSeats() { return showSeats; }
+
+  // Find a seat by seat number
+  ShowSeat *findSeat(const std::string &seatNumber) {
+    for (auto &showSeat : showSeats) {
+      if (showSeat.getSeat().getSeatNumber() == seatNumber) {
+        return &showSeat;
+      }
     }
 
-    // Getters
-    int getShowId() const
-    {
-        return showId;
+    return nullptr;
+  }
+
+  const ShowSeat *findSeat(const std::string &seatNumber) const {
+    for (const auto &showSeat : showSeats) {
+      if (showSeat.getSeat().getSeatNumber() == seatNumber) {
+        return &showSeat;
+      }
     }
 
-    const Movie& getMovie() const
-    {
-        return *movie;
-    }
+    return nullptr;
+  }
 
-    const Screen& getScreen() const
-    {
-        return screen;
-    }
+  // Display seat layout
+  void displaySeatLayout() const {
+    std::cout << "\nSCREEN-" << screen.getScreenId() << "  " << showTime
+              << " | " << movie->getTitle() << "\n\n";
 
-    const std::string& getShowTime() const
-    {
-        return showTime;
-    }
+    std::string currentCategory = "";
 
-    const std::vector<ShowSeat>& getShowSeats() const
-    {
-        return showSeats;
-    }
+    for (const auto &showSeat : showSeats) {
+      std::string seatType = showSeat.getSeat().getSeatType();
 
-    std::vector<ShowSeat>& getShowSeats()
-    {
-        return showSeats;
-    }
-
-    // Find a seat by seat number
-    ShowSeat* findSeat(const std::string& seatNumber)
-    {
-        for (auto& showSeat : showSeats)
-        {
-            if (showSeat.getSeat().getSeatNumber() == seatNumber)
-            {
-                return &showSeat;
-            }
-        }
-
-        return nullptr;
-    }
-
-    const ShowSeat* findSeat(const std::string& seatNumber) const
-    {
-        for (const auto& showSeat : showSeats)
-        {
-            if (showSeat.getSeat().getSeatNumber() == seatNumber)
-            {
-                return &showSeat;
-            }
+      if (seatType != currentCategory) {
+        if (!currentCategory.empty()) {
+          std::cout << "\n";
         }
 
-        return nullptr;
+        currentCategory = seatType;
+
+        std::cout << std::left << std::setw(12) << currentCategory;
+      }
+
+      std::cout << showSeat.getSeat().getSeatNumber()
+                << (showSeat.isAvailable() ? "[ ] " : "[X] ");
     }
 
-    // Display seat layout
-    void displaySeatLayout() const
-    {
-        std::cout << "\nSCREEN-" << screen.getScreenId()
-                  << "  " << showTime
-                  << " | " << movie->getTitle()
-                  << "\n\n";
-
-        std::string currentCategory = "";
-
-        for (const auto& showSeat : showSeats)
-        {
-            std::string seatType = showSeat.getSeat().getSeatType();
-
-            if (seatType != currentCategory)
-            {
-                if (!currentCategory.empty())
-                {
-                    std::cout << "\n";
-                }
-
-                currentCategory = seatType;
-
-                std::cout << std::left
-                          << std::setw(12)
-                          << currentCategory;
-            }
-
-            std::cout << showSeat.getSeat().getSeatNumber()
-                      << (showSeat.isAvailable() ? "[ ] " : "[X] ");
-        }
-
-        std::cout << "\n\n";
-        std::cout << "[ ] = Available    [X] = Booked\n\n";
-    }
+    std::cout << "\n\n";
+    std::cout << "[ ] = Available    [X] = Booked\n\n";
+  }
 };
 
 #endif
