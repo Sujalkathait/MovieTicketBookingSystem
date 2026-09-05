@@ -417,7 +417,7 @@ public:
         std::cout << "Choose Payment: ";
 
         int choice;
-        std::cin >> choice;
+        if (!(std::cin >> choice)) { std::cin.clear(); std::cin.ignore(10000, '\n'); choice = -1; }
 
         bool paymentSuccess = false;
         std::string paymentMode;
@@ -513,7 +513,7 @@ public:
                 std::cout << " Are you sure you want to cancel this booking? (y/n): ";
 
                 char choice;
-                std::cin >> choice;
+        if (!(std::cin >> choice)) { std::cin.clear(); std::cin.ignore(10000, '\n'); choice = -1; }
 
                 if (choice == 'y' || choice == 'Y')
                 {
@@ -574,7 +574,7 @@ public:
         std::cout << "Choose movie: ";
 
         int movieChoice;
-        std::cin >> movieChoice;
+        if (!(std::cin >> movieChoice)) { std::cin.clear(); std::cin.ignore(10000, '\n'); movieChoice = -1; }
 
         if (movieChoice < 1 ||
             movieChoice > static_cast<int>(movies.size()))
@@ -600,7 +600,7 @@ public:
         std::cout << "Choose show: ";
 
         int showChoice;
-        std::cin >> showChoice;
+        if (!(std::cin >> showChoice)) { std::cin.clear(); std::cin.ignore(10000, '\n'); showChoice = -1; }
 
         if (showChoice < 1 ||
             showChoice > static_cast<int>(showIndices.size()))
@@ -625,7 +625,7 @@ public:
         do
         {
             displayMainMenu();
-            std::cin >> choice;
+        if (!(std::cin >> choice)) { std::cin.clear(); std::cin.ignore(10000, '\n'); choice = -1; }
 
             switch (choice)
             {
