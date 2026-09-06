@@ -1,6 +1,6 @@
 # Movie Ticket Booking System
 
-[Watch the Project Demo Video](MovieTicketBookingSystem%20video/project%20demo.mp4)
+<video src="MovieTicketBookingSystem%20video/project%20demo.mp4" controls="controls" style="max-width: 100%;"></video>
 ## 1. What is this Project?
 Welcome to the Movie Ticket Booking System! This is an in-memory Console Application built in C++ that simulates a real-world cinema booking experience. It demonstrates Low-Level Design (LLD) principles, Object-Oriented Programming (OOP), and clean architecture by breaking down a complex system into manageable classes and services.
 
