@@ -148,3 +148,8 @@ This image shows the interaction logic when a customer pays using UPI.
 This image outlines the object-oriented architectural relationships in the codebase.
 
 ![Architecture Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
+
+### 6.4 UML Class Diagram
+This image shows the UML Class Diagram representing the structure of the system.
+
+![UML Class Diagram](MovieTicketBookingSystem%20image/UML-diagram.png)
