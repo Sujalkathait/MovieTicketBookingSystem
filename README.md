@@ -148,6 +148,149 @@ This image outlines the object-oriented architectural relationships in the codeb
 ![Architecture Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
 
 ### 6.4 UML Class Diagram
-This image shows the UML Class Diagram representing the structure of the system.
+This diagram outlines the Object-Oriented structure of the system as per the official design.
 
-![UML Class Diagram](MovieTicketBookingSystem%20image/UML-diagram.png)
+```mermaid
+classDiagram
+    class CinemaMainMenu {
+        -BookingService bookingService
+        +showMenu()
+        +takeUserInput()
+    }
+    
+    class BookingService {
+        -vector~Show~ shows
+        -vector~Booking~ bookings
+        +PriceCalculator priceCalculator
+        +startBooking()
+        +cancelBooking(string bookingId)
+        +findShow(string showId)
+        +generateBookingId()
+    }
+    
+    class Booking {
+        -string bookingId
+        -Customer customer
+        -Show show
+        -vector~ShowSeat~ seats
+        -double totalAmount
+        -BookingStatus status
+        +confirm()
+        +cancel()
+        +getBookingId()
+        +getTotalAmount()
+        +getStatus()
+    }
+    
+    class PriceCalculator {
+        -double silverPrice
+        -double goldPrice
+        -double platinumPrice
+        +calculate(vector~ShowSeat~ seats)
+    }
+    
+    class TicketPrinter {
+        +printTicket(Booking booking)
+    }
+    
+    class Payment {
+        <<interface>>
+        +pay(double amount)
+    }
+    
+    class UpiPayment {
+        -string upiId
+        +pay(double amount)
+    }
+    
+    class CardPayment {
+        -string cardNumber
+        -string holderName
+        +pay(double amount)
+    }
+    
+    class CashPayment {
+        -string receivedBy
+        +pay(double amount)
+    }
+    
+    class Show {
+        -Movie movie
+        -Screen screen
+        -string showTime
+        -vector~ShowSeat~ showSeats
+        +getMovie()
+        +getScreen()
+        +getShowTime()
+        +getShowSeats()
+    }
+    
+    class Cinema {
+        -string name
+        -vector~Screen~ screens
+        +getName()
+        +getScreens()
+    }
+    
+    class Screen {
+        -int screenNumber
+        -vector~Seat~ seats
+        +getScreenNumber()
+        +getSeats()
+    }
+    
+    class Movie {
+        -string title
+        -string language
+        -int duration
+        +getTitle()
+        +getLanguage()
+        +getDuration()
+    }
+    
+    class ShowSeat {
+        -Seat seat
+        -ShowSeatStatus status
+        +book()
+        +cancel()
+        +isAvailable()
+        +getSeat()
+        +getStatus()
+    }
+    
+    class Seat {
+        -string seatNumber
+        -SeatType seatType
+        +getSeatNumber()
+        +getSeatType()
+    }
+    
+    class Customer {
+        -string name
+        -string phone
+        +getName()
+        +getPhone()
+    }
+
+    CinemaMainMenu --> BookingService : uses
+    BookingService --> Booking : creates
+    BookingService --> PriceCalculator : calculates
+    BookingService --> TicketPrinter : prints
+    BookingService --> Payment : processes
+    
+    Booking --> Show : for
+    Booking --> Customer : belongs to
+    Booking --> ShowSeat : includes
+    
+    Payment <|-- UpiPayment 
+    Payment <|-- CardPayment 
+    Payment <|-- CashPayment 
+    
+    Cinema --> Screen : contains
+    Cinema --> Movie : has
+    Screen --> Seat : contains
+    Show --> Movie : has
+    Show --> Screen : occurs in
+    Show --> ShowSeat : contains
+    ShowSeat --> Seat : uses
+```
