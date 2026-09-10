@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Customer
+    participant BookingService
+    participant Show
+    participant ShowSeat
+    participant PriceCalculator
+    participant UpiPayment
+    participant Booking
+    participant TicketPrinter
+
+    Customer->>BookingService: 1. Chooses a show
+    Customer->>BookingService: 2. Selects one seat
+    BookingService->>Show: 4. Checks the Show
+    Show->>ShowSeat: 5. Checks selected ShowSeat
+    ShowSeat-->>BookingService: 6. Confirms availability
+    BookingService->>PriceCalculator: 7. Calculates the price
+    PriceCalculator-->>BookingService: Returns price
+    BookingService->>UpiPayment: 8. Creates/Uses UpiPayment
+    UpiPayment-->>BookingService: 9. UPI payment processed
+    BookingService->>Booking: 10. Booking is created
+    BookingService->>TicketPrinter: 11. Prints the ticket
+    TicketPrinter-->>Customer: 12. Confirmation is returned

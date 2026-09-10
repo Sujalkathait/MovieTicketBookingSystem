@@ -1,0 +1,44 @@
+flowchart LR
+    classDef mainFlow fill:#2b6cb0,stroke:#1a365d,color:#fff,stroke-width:2px;
+    classDef principles fill:#b7791f,stroke:#744210,color:#fff,stroke-width:2px;
+    classDef documentation fill:#2f855a,stroke:#22543d,color:#fff,stroke-width:2px;
+    classDef specific fill:#6b46c1,stroke:#44337a,color:#fff,stroke-width:2px;
+
+    Req[Requirements Analysis]:::mainFlow
+    NVA[Noun-Verb Analysis]:::mainFlow
+    ObjId[Object Identification]:::mainFlow
+    ObjRel[Object Relationships]:::mainFlow
+    ClassDes[Class Design]:::mainFlow
+    UML[UML Class Diagram]:::mainFlow
+    Seq[Sequence Diagram]:::mainFlow
+    UpiSeq[UPI Booking Sequence]:::specific
+    Impl[Implementation]:::mainFlow
+
+    OOP[OOP Concepts]:::principles
+    SOLID[SOLID Principles]:::principles
+    
+    Doc[README.md / Documentation]:::documentation
+
+    Req -->|defines| NVA
+    NVA -->|extracts| ObjId
+    ObjId -->|identifies| ObjRel
+    ObjRel -->|defines relationships| ClassDes
+    
+    ClassDes -->|visualizes static structure| UML
+    ClassDes -->|represents interaction| Seq
+    
+    UML -->|guides| Impl
+    Seq -->|guides| Impl
+    
+    Seq -->|concrete use case| UpiSeq
+
+    OOP -->|guides| ClassDes
+    SOLID -->|improves| ClassDes
+    
+    Req -.->|contributes to| UML
+    NVA -.->|contributes to| UML
+    ObjRel -.->|contributes to| UML
+
+    Req -.->|documented in| Doc
+    Impl -.->|documented in| Doc
+    ClassDes -.->|documented in| Doc

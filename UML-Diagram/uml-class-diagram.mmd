@@ -1,0 +1,105 @@
+classDiagram
+    class BookingService {
+        -vector~Show~ shows
+        -vector~Booking~ bookings
+        +startBooking()
+        +cancelBooking(string bookingId)
+    }
+    
+    class Booking {
+        -string bookingId
+        -Customer customer
+        -Show show
+        -vector~ShowSeat~ seats
+        -double totalAmount
+        +confirm()
+        +cancel()
+    }
+    
+    class PriceCalculator {
+        +calculate(vector~ShowSeat~ seats) double
+    }
+    
+    class TicketPrinter {
+        +printTicket(Booking booking)
+    }
+    
+    class Payment {
+        <<interface>>
+        +pay(double amount) bool
+    }
+    
+    class UpiPayment {
+        -string upiId
+        +pay(double amount) bool
+    }
+    
+    class CardPayment {
+        -string cardNumber
+        +pay(double amount) bool
+    }
+    
+    class CashPayment {
+        -string receivedBy
+        +pay(double amount) bool
+    }
+    
+    class Show {
+        -Movie movie
+        -Screen screen
+        -string showTime
+        -vector~ShowSeat~ showSeats
+    }
+    
+    class Cinema {
+        -string name
+        -vector~Screen~ screens
+    }
+    
+    class Screen {
+        -int screenNumber
+        -vector~Seat~ seats
+    }
+    
+    class Movie {
+        -string title
+        -int duration
+    }
+    
+    class ShowSeat {
+        -Seat seat
+        -ShowSeatStatus status
+        +book()
+        +isAvailable()
+    }
+    
+    class Seat {
+        -string seatNumber
+        -SeatType seatType
+    }
+    
+    class Customer {
+        -string name
+        -string phone
+    }
+
+    BookingService --> Booking : creates
+    BookingService --> PriceCalculator : uses
+    BookingService --> TicketPrinter : uses
+    BookingService --> Payment : processes
+    
+    Booking --> Show : for
+    Booking --> Customer : belongs to
+    Booking --> ShowSeat : includes
+    
+    Payment <|-- UpiPayment 
+    Payment <|-- CardPayment 
+    Payment <|-- CashPayment 
+    
+    Cinema *-- Screen : contains
+    Cinema o-- Movie : has
+    Screen *-- Seat : contains
+    Show o-- Movie : has
+    Show o-- Screen : occurs in
+    Show *-- ShowSeat : contains
+    ShowSeat -- Seat : uses

@@ -1,296 +1,98 @@
-# Movie Ticket Booking System
+# Cinema Booking System
 
-## 1. What is this Project?
-Welcome to the Movie Ticket Booking System! This is an in-memory Console Application built in C++ that simulates a real-world cinema booking experience. It demonstrates Low-Level Design (LLD) principles, Object-Oriented Programming (OOP), and clean architecture by breaking down a complex system into manageable classes and services.
-
----
-
-## 2. What does it do?
-With this application, you can perform all the core functions of a movie theater:
-- **Browse Movies:** View a list of all currently playing movies and their details (language, duration).
-- **Select Shows:** Pick a specific screen and time for your chosen movie.
-- **Pick Seats:** View a live, formatted seating chart (Silver, Gold, Platinum) and select available seats.
-- **Pay:** Process payments securely via simulated UPI, Card, or Cash methods.
-- **Get a Ticket:** Receive a fully formatted ticket receipt containing your unique Booking ID, customer details, and seat numbers.
-- **Cancel Tickets:** Look up an existing booking and cancel it to automatically release the seats back to the public and issue a refund.
-- **Search Tickets:** Retrieve past bookings at any time using your phone number or unique Booking ID.
+## 🎥 Video Demo
+<video src="MovieTicketBookingSystem video/project demo.mp4" controls="controls" style="max-width: 100%;">
+  Your browser does not support the video tag. Please view the video file directly in the `MovieTicketBookingSystem video` folder.
+</video>
 
 ---
 
-## 3. Project Files Explained
-The code is broken down into small, modular files to ensure it is easy to read and maintain. Each file has a single responsibility:
-- `main1.cpp`: The entry point. It initializes the cinema, screens, seats, movies, and starts the main menu.
-- `movie2.cpp`: Defines the `Movie` class (stores title, language, duration).
-- `seat3.cpp` & `screen4.cpp`: Manages the physical layout of the cinema, including seat numbers and categories (Silver, Gold, Platinum).
-- `cinema5.cpp`, `showSeat6.cpp`, `show7.cpp`: Connects movies to screens at specific times and tracks the real-time availability of individual seats.
-- `priceCalculator8.cpp`: Dynamically calculates the total price based on the category of the selected seats.
-- `bookingService9.cpp`: The brain of the application. It handles the entire booking flow, manages the list of all tickets, processes cancellations, and handles user input.
-- `customer10.cpp`: Stores the customer's personal details (Name and Phone Number).
-- `payment11.cpp` to `cashPayment14.cpp`: Implements a polymorphic payment system that handles UPI, Card, and Cash transactions.
+## Project Overview
+The Cinema Booking System is an in-memory Console Application built in C++ that simulates a real-world movie theater experience. It handles everything from browsing movies and selecting seats to processing payments and generating a final booking ticket. This project serves as a comprehensive demonstration of Low-Level Design (LLD), Object-Oriented Programming (OOP), and clean software architecture.
+
+## Objectives
+The main objective of this project is to apply standard software engineering practices to translate functional requirements into a working software system. It bridges the gap between theoretical concepts (Requirement Analysis, UML Design, SOLID Principles) and practical implementation in C++.
+
+## Documentation Index
+The documentation for this project has been carefully modularized into folders. Please explore the sections below to understand the complete software engineering lifecycle:
+
+1. **[Requirements Analysis](Requirements-Analysis/requirements-analysis.md)**
+2. **[Noun-Verb Analysis](Noun-Verb-Analysis/noun-verb-analysis.md)**
+3. **[Object Relationships](Object-Relationships/object-relationships.md)**
+4. **[Class Design](Class-Design/class-design.md)**
+   - *Supporting Principles:*
+     - [OOP Concepts](OOP-Concepts/oop-concepts.md)
+     - [SOLID Principles](SOLID-Principles/solid-principles.md)
+5. **[UML Class Diagram](UML-Diagram/uml-class-diagram.md)**
+6. **[Sequence Diagram & UPI Use Case](Sequence-Diagram/sequence-diagram.md)**
 
 ---
 
-## 4. How to Run the Code
+## Concept Relationship Graph
+The following flowchart visually communicates the complete software design workflow, demonstrating how each engineering concept connects and contributes to the final product.
 
-To run this program, open your terminal (e.g., inside VS Code) in the `MovieTicketBookingSystem/` folder and compile the code using `g++`:
+*(View the raw Mermaid code in [relationship-graph.mmd](Relationship-Graph/relationship-graph.mmd))*
+
+```mermaid
+flowchart LR
+    classDef mainFlow fill:#2b6cb0,stroke:#1a365d,color:#fff,stroke-width:2px;
+    classDef principles fill:#b7791f,stroke:#744210,color:#fff,stroke-width:2px;
+    classDef documentation fill:#2f855a,stroke:#22543d,color:#fff,stroke-width:2px;
+    classDef specific fill:#6b46c1,stroke:#44337a,color:#fff,stroke-width:2px;
+
+    Req[Requirements Analysis]:::mainFlow
+    NVA[Noun-Verb Analysis]:::mainFlow
+    ObjId[Object Identification]:::mainFlow
+    ObjRel[Object Relationships]:::mainFlow
+    ClassDes[Class Design]:::mainFlow
+    UML[UML Class Diagram]:::mainFlow
+    Seq[Sequence Diagram]:::mainFlow
+    UpiSeq[UPI Booking Sequence]:::specific
+    Impl[Implementation]:::mainFlow
+
+    OOP[OOP Concepts]:::principles
+    SOLID[SOLID Principles]:::principles
+    
+    Doc[README.md / Documentation]:::documentation
+
+    Req -->|defines| NVA
+    NVA -->|extracts| ObjId
+    ObjId -->|identifies| ObjRel
+    ObjRel -->|defines relationships| ClassDes
+    
+    ClassDes -->|visualizes static structure| UML
+    ClassDes -->|represents interaction| Seq
+    
+    UML -->|guides| Impl
+    Seq -->|guides| Impl
+    
+    Seq -->|concrete use case| UpiSeq
+
+    OOP -->|guides| ClassDes
+    SOLID -->|improves| ClassDes
+    
+    Req -.->|contributes to| UML
+    NVA -.->|contributes to| UML
+    ObjRel -.->|contributes to| UML
+
+    Req -.->|documented in| Doc
+    Impl -.->|documented in| Doc
+    ClassDes -.->|documented in| Doc
+```
+
+## Project Structure
+The C++ codebase is modularized according to the Single Responsibility Principle, ensuring clean separations between core logic (`BookingService`), entities (`Show`, `Seat`), and payment interfaces. To run the code, use the following commands:
 
 ```bash
 g++ main1.cpp -o MovieTicketBooking
-```
-
-Once compiled, you can start the program from the terminal based on your operating system:
-
-**On Windows:**
-```powershell
-.\MovieTicketBooking.exe
-```
-
-**On MacOS / Linux:**
-```bash
 ./MovieTicketBooking
 ```
 
----
+## Complete Design Flow
+This project proves that writing code is merely the final step of software engineering. The bulk of the work lies in mapping requirements, analyzing nouns and verbs, determining object relationships, strictly adhering to OOP/SOLID paradigms, and verifying logic via UML and Sequence charts prior to implementation.
 
-## 5. Error Handling
-The application is robust and designed to prevent crashes from bad user input:
-- **Invalid Inputs:** If you accidentally type letters instead of numbers in menus, the system safely catches the error, clears the input buffer, and asks you again without crashing.
-- **Invalid Booking IDs:** If you try to look up or cancel a booking that doesn't exist (or was already cancelled), the system will notify you safely.
-- **Seat Validation:** The system prevents you from booking a seat that doesn't exist, booking a seat that is already taken, or entering duplicate seats in the same transaction.
-- **Payment Failures:** If you abort the payment process halfway through, the transaction is rolled back and your selected seats are immediately freed up for other users.
+## Learning Outcomes
+By following this architecture, one can learn how enterprise systems decouple logic, handle polymorphic workflows, and translate raw text requirements into strict, compilable class structures.
 
----
-
-## 6. System Diagrams
-
-### 6.1 End-to-End System Workflow
-This flowchart shows how a user interacts with the system from start to finish.
-
-```mermaid
-flowchart TD
-    Start([User Starts System]) --> Menu[Main Menu]
-
-    Menu --> M1{Select Option}
-
-    M1 -->|1 - Movies| ShowMovies["Show Available Movies & Shows"]
-    ShowMovies --> Menu
-
-    M1 -->|2 - Book Ticket| SelectMovie["Select Movie & Show"]
-    SelectMovie --> Layout["Show Live Seat Layout"]
-
-    Layout --> PickSeats["Enter Seats (e.g., A1, B2)"]
-    PickSeats --> Validate{"Are Seats Valid & Available?"}
-
-    Validate -->|No| ShowError["Show Seat Error"]
-    ShowError --> Layout
-
-    Validate -->|Yes| CalcPrice["Calculate Ticket Price"]
-
-    CalcPrice --> CustInfo["Enter Customer Details (Name & Phone)"]
-    CustInfo --> SelectPay["Select Payment Method"]
-
-    SelectPay --> PayMode{Payment Method}
-
-    PayMode -->|1 - UPI| UPIPay["Process UPI Payment"]
-    PayMode -->|2 - Card| CardPay["Process Card Payment"]
-    PayMode -->|3 - Cash| CashPay["Process Cash Payment"]
-    PayMode -->|0 - Decline| Rollback["Cancel and Free Selected Seats"]
-
-    UPIPay --> PayCheck{"Payment Successful?"}
-    CardPay --> PayCheck
-    CashPay --> PayCheck
-
-    PayCheck -->|No| Rollback
-    PayCheck -->|Yes| Confirm["Confirm Booking and Mark Seats as BOOKED"]
-
-    Confirm --> GenTicket["Create Booking ID (e.g., BK1001)"]
-    GenTicket --> PrintTicket[Print Ticket]
-    PrintTicket --> Menu
-
-    Rollback --> Menu
-
-    M1 -->|3 - Cancel Ticket| CancelPrompt["Enter Booking ID"]
-    CancelPrompt --> FindBooking{"Is Booking Found?"}
-
-    FindBooking -->|No| CancelErr["Show Booking Not Found Error"]
-    CancelErr --> Menu
-
-    FindBooking -->|Yes| ConfirmCancel{"Confirm Cancellation?"}
-
-    ConfirmCancel -->|No| Abort["Stop Cancellation"]
-    Abort --> Menu
-
-    ConfirmCancel -->|Yes| CancelBooking["Cancel Booking"]
-    CancelBooking --> Refund["Issue Full Refund"]
-    Refund --> Release["Free Seats and Update Status to CANCELLED"]
-    Release --> Menu
-
-    M1 -->|4 - My Tickets| Lookup["Enter Booking ID or Phone Number"]
-    Lookup --> Search{"Is Booking Found?"}
-
-    Search -->|Yes| ShowTicket[Show Ticket]
-    ShowTicket --> Menu
-
-    Search -->|No| NotFound[Show: No Tickets Found]
-    NotFound --> Menu
-
-    M1 -->|0 - Exit| ExitApp([Exit App])
-```
-
-### 6.2 UPI Payment Sequence Diagram
-This image shows the interaction logic when a customer pays using UPI.
-
-![Cinema Booking UPI Sequence Diagram](MovieTicketBookingSystem%20image/Cinema_Booking_UPI_Sequence_Diagram.png)
-
-### 6.3 System Architecture
-This image outlines the object-oriented architectural relationships in the codebase.
-
-![Architecture Sequence Diagram](MovieTicketBookingSystem%20image/squence%20diagram.png)
-
-### 6.4 UML Class Diagram
-This diagram outlines the Object-Oriented structure of the system as per the official design.
-
-```mermaid
-classDiagram
-    class CinemaMainMenu {
-        -BookingService bookingService
-        +showMenu()
-        +takeUserInput()
-    }
-    
-    class BookingService {
-        -vector~Show~ shows
-        -vector~Booking~ bookings
-        +PriceCalculator priceCalculator
-        +startBooking()
-        +cancelBooking(string bookingId)
-        +findShow(string showId)
-        +generateBookingId()
-    }
-    
-    class Booking {
-        -string bookingId
-        -Customer customer
-        -Show show
-        -vector~ShowSeat~ seats
-        -double totalAmount
-        -BookingStatus status
-        +confirm()
-        +cancel()
-        +getBookingId()
-        +getTotalAmount()
-        +getStatus()
-    }
-    
-    class PriceCalculator {
-        -double silverPrice
-        -double goldPrice
-        -double platinumPrice
-        +calculate(vector~ShowSeat~ seats)
-    }
-    
-    class TicketPrinter {
-        +printTicket(Booking booking)
-    }
-    
-    class Payment {
-        <<interface>>
-        +pay(double amount)
-    }
-    
-    class UpiPayment {
-        -string upiId
-        +pay(double amount)
-    }
-    
-    class CardPayment {
-        -string cardNumber
-        -string holderName
-        +pay(double amount)
-    }
-    
-    class CashPayment {
-        -string receivedBy
-        +pay(double amount)
-    }
-    
-    class Show {
-        -Movie movie
-        -Screen screen
-        -string showTime
-        -vector~ShowSeat~ showSeats
-        +getMovie()
-        +getScreen()
-        +getShowTime()
-        +getShowSeats()
-    }
-    
-    class Cinema {
-        -string name
-        -vector~Screen~ screens
-        +getName()
-        +getScreens()
-    }
-    
-    class Screen {
-        -int screenNumber
-        -vector~Seat~ seats
-        +getScreenNumber()
-        +getSeats()
-    }
-    
-    class Movie {
-        -string title
-        -string language
-        -int duration
-        +getTitle()
-        +getLanguage()
-        +getDuration()
-    }
-    
-    class ShowSeat {
-        -Seat seat
-        -ShowSeatStatus status
-        +book()
-        +cancel()
-        +isAvailable()
-        +getSeat()
-        +getStatus()
-    }
-    
-    class Seat {
-        -string seatNumber
-        -SeatType seatType
-        +getSeatNumber()
-        +getSeatType()
-    }
-    
-    class Customer {
-        -string name
-        -string phone
-        +getName()
-        +getPhone()
-    }
-
-    CinemaMainMenu --> BookingService : uses
-    BookingService --> Booking : creates
-    BookingService --> PriceCalculator : calculates
-    BookingService --> TicketPrinter : prints
-    BookingService --> Payment : processes
-    
-    Booking --> Show : for
-    Booking --> Customer : belongs to
-    Booking --> ShowSeat : includes
-    
-    Payment <|-- UpiPayment 
-    Payment <|-- CardPayment 
-    Payment <|-- CashPayment 
-    
-    Cinema --> Screen : contains
-    Cinema --> Movie : has
-    Screen --> Seat : contains
-    Show --> Movie : has
-    Show --> Screen : occurs in
-    Show --> ShowSeat : contains
-    ShowSeat --> Seat : uses
-```
+## Conclusion
+The Cinema Booking System effectively simulates real-world transaction workflows through a rigorous application of software engineering principles. It stands as a prime example of translating a logical UML design into a fully functional implementation.
