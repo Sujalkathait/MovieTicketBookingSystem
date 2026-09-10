@@ -1,19 +1,18 @@
-# 🎬 Cinema Booking System
-> A C++ console-based Cinema Booking System designed to demonstrate
-> **Low-Level Design (LLD), Object-Oriented Programming (OOP), SOLID principles, UML modeling, and software engineering practices.**
+# Cinema Booking System
+> A C++ console-based Cinema Booking System designed to demonstrate Low-Level Design (LLD), Object-Oriented Programming (OOP), SOLID principles, UML modeling, and software engineering practices.
 
 ---
 
-## 🎥 Video Demo
+## Video Demo
 
 https://github.com/Sujalkathait/MovieTicketBookingSystem/raw/main/MovieTicketBookingSystem%20video/project%20demo.mp4
 
 ---
 
-## 📌 Project Overview
-The **Cinema Booking System** is an in-memory console application developed in **C++** that simulates a basic real-world movie ticket booking workflow. The system covers the complete journey of a customer, starting from selecting a movie and show, checking seat availability, selecting a seat, calculating the ticket price, choosing a payment method, creating a booking, and finally printing the ticket.
+## Project Overview
+The Cinema Booking System is a simple console application built in C++. It simulates how a customer books a movie ticket in real life. The system takes you through the entire process: browsing movies, choosing a show and a seat, calculating the ticket price, selecting a payment method, and finally printing the confirmed ticket.
 
-The project focuses on understanding how a real-world problem can be converted into a structured software design using:
+This project exists to show how real-world problems can be translated into well-structured code using standard software engineering steps:
 - Requirements Analysis
 - Noun-Verb Analysis
 - Object Identification
@@ -27,23 +26,23 @@ The project focuses on understanding how a real-world problem can be converted i
 
 ---
 
-## 🎯 Objectives
-The main objectives of this project are to:
-- Convert real-world requirements into software objects.
-- Identify classes and responsibilities using Noun-Verb Analysis.
-- Define relationships between objects.
-- Apply Object-Oriented Programming concepts.
-- Apply SOLID design principles.
-- Create a structured Low-Level Design.
-- Represent the system using UML diagrams.
-- Model object interaction using Sequence Diagrams.
-- Implement the final design in C++.
-- Understand the connection between analysis, design, and implementation.
+## Objectives
+The main goals of this project are to:
+- Turn real-world needs into software objects.
+- Find classes and their tasks using Noun-Verb Analysis.
+- Define how objects interact with each other.
+- Use Object-Oriented Programming (OOP) concepts.
+- Write maintainable code using SOLID principles.
+- Create a clear Low-Level Design.
+- Draw UML diagrams to show the system's structure.
+- Draw Sequence Diagrams to show how objects communicate.
+- Write the final working code in C++.
+- Show the clear link between designing software and writing the code.
 
 ---
 
-## 🧭 Software Design Workflow
-The project follows a structured software engineering process:
+## Software Design Workflow
+This project follows a step-by-step process:
 ```text
 Requirements Analysis
          ↓
@@ -65,10 +64,10 @@ C++ Implementation
 - OOP Concepts ──────────→ Class Design
 - SOLID Principles ──────→ Class Design
 
-This shows that the implementation is the final result of the analysis and design process.
+This workflow proves that coding is simply the final result of good planning and design.
 
-## 🔗 Concept Relationship Graph
-The following graph shows how all major software-engineering concepts used in this project are connected.
+## Concept Relationship Graph
+This chart shows how all the major software engineering concepts connect in this project.
 
 ```mermaid
 flowchart LR
@@ -102,22 +101,21 @@ flowchart LR
     Rel -.->|"contributes to"| UML
 ```
 
-### 💡 What the Graph Means
-The graph represents the complete design journey:
-- Requirements define what the system needs to do.
-- Noun-Verb Analysis identifies possible objects and operations.
-- Object Relationships determine how those objects are connected.
-- Class Design converts the identified objects into structured classes.
-- OOP and SOLID provide principles for designing those classes properly.
-- UML Class Diagram represents the static structure of the system.
-- Sequence Diagram represents how objects communicate during execution.
-- The UPI Booking Use Case is a specific example of the sequence flow.
-- Finally, the design is converted into the C++ implementation.
+### What the Graph Means
+- **Requirements** define what the system needs to do.
+- **Noun-Verb Analysis** looks at the requirements to find possible objects and actions.
+- **Object Relationships** figure out how those objects connect to each other.
+- **Class Design** turns those objects into actual software classes.
+- **OOP and SOLID** provide the rules for designing those classes properly.
+- **UML Class Diagram** is a drawing of the system's structure.
+- **Sequence Diagram** is a drawing of how objects talk to each other when the program runs.
+- **The UPI Booking Use Case** is a specific example of that sequence.
+- **Implementation** is turning all of this design into working C++ code.
 
 ---
 
-## 📚 Documentation
-The project documentation is divided into separate sections so that each software-engineering concept can be studied independently.
+## Documentation
+The project documentation is split into separate folders so that each topic can be studied easily.
 
 | # | Topic | Documentation |
 |---|---|---|
@@ -133,71 +131,46 @@ The project documentation is divided into separate sections so that each softwar
 
 ---
 
-## 📝 1. Requirements Analysis
-Requirements Analysis defines what the Cinema Booking System is expected to do.
+## 1. Requirements Analysis
+Requirements Analysis is simply defining what the Cinema Booking System needs to do.
 
-**The major functional requirements include:**
-- Customer accesses the cinema system.
-- Customer views available movies.
-- Customer selects a movie.
-- Customer selects a show.
-- Customer selects a screen.
-- Customer views available seats.
-- Customer selects a seat.
-- System checks seat availability.
-- System calculates the ticket price.
-- Customer selects a payment method.
-- System processes the payment.
-- System creates the booking.
-- System generates the ticket.
-- System prints the ticket.
+**The main tasks the system must handle are:**
+- The customer can view available movies, shows, and screens.
+- The customer can see which seats are available.
+- The customer can select a seat.
+- The system checks if the seat is free and calculates the price.
+- The customer chooses how to pay (UPI, Card, or Cash).
+- The system processes the payment and prints a ticket.
 
-**Payment Methods**
-The system supports:
-- UPI
-- Card
-- Cash
-
-📖 **Detailed Documentation:** [Requirements Analysis](Requirements-Analysis/requirements-analysis.md)
+**Detailed Documentation:** [Requirements Analysis](Requirements-Analysis/requirements-analysis.md)
 
 ---
 
-## 🔤 2. Noun-Verb Analysis
-Noun-Verb Analysis is used to extract possible objects and operations from the system requirements.
+## 2. Noun-Verb Analysis
+Noun-Verb Analysis is a technique where we read the requirements and pick out the Nouns and Verbs.
 
-**Important Nouns**
-`Cinema` `Screen` `Seat` `Movie` `Show` `ShowSeat` `Customer` `Booking` `Payment` `UpiPayment` `CardPayment` `CashPayment` `Ticket` `BookingService` `PriceCalculator` `TicketPrinter`
+**Nouns (These usually become Objects or Classes):**
+`Cinema`, `Screen`, `Seat`, `Movie`, `Show`, `Customer`, `Booking`, `Payment`, `Ticket`
 
-**Important Verbs**
-`view` `select` `book` `check` `calculate` `pay` `process` `create` `generate` `print`
+**Verbs (These usually become Methods or Actions):**
+`view`, `select`, `book`, `calculate`, `pay`, `print`
 
-**For example:**
-*Customer books a seat.*
-Can be analyzed as:
-- **Customer** → Candidate Object/Class
-- **books** → Candidate Operation
-- **seat** → Candidate Object/Class
+For example, in the sentence *"Customer books a seat"*:
+- **Customer** and **seat** become Classes.
+- **books** becomes a Method (action).
 
-Noun-Verb Analysis provides candidates; the final classes are decided after considering responsibilities and relationships.
-
-📖 **Detailed Documentation:** [Noun-Verb Analysis](Noun-Verb-Analysis/noun-verb-analysis.md)
+**Detailed Documentation:** [Noun-Verb Analysis](Noun-Verb-Analysis/noun-verb-analysis.md)
 
 ---
 
-## 🔗 3. Object Relationships
-The system contains several important relationships.
+## 3. Object Relationships
+This step decides how the different objects connect to each other.
 
 ```text
 Cinema ◆── Screen
 Screen ◆── Seat
 Show ◇── Movie
-Show ◇── Screen
-Show ◆── ShowSeat
-ShowSeat ── Seat
 Booking ── Customer
-Booking ── Show
-Booking ── Seat
-Booking ── Payment
 
 Payment
   ▲
@@ -206,142 +179,99 @@ Payment
   └── CashPayment
 ```
 
-**Where:**
-- `◆` = Composition
-- `◇` = Aggregation
-- `──` = Association
-- `▲` = Inheritance
+**Symbols Explained:**
+- `◆` = Composition (A Screen cannot exist without a Cinema).
+- `◇` = Aggregation (A Movie can exist without a Show).
+- `──` = Association (A Booking is just linked to a Customer).
+- `▲` = Inheritance (UPI is a specific type of Payment).
 
-These relationships describe how different objects collaborate within the system.
-
-📖 **Detailed Documentation:** [Object Relationships](Object-Relationships/object-relationships.md)
+**Detailed Documentation:** [Object Relationships](Object-Relationships/object-relationships.md)
 
 ---
 
-## 🧱 4. OOP Concepts
-The project demonstrates the four major Object-Oriented Programming concepts:
+## 4. OOP Concepts
+Object-Oriented Programming (OOP) uses four main ideas:
 
-- **Encapsulation:** Data and the operations that work on that data are grouped inside classes.
-- **Abstraction:** Common behavior can be represented through a higher-level abstraction such as Payment.
-- **Inheritance:** Specific payment types can inherit from or implement the common payment abstraction.
-- **Polymorphism:** Different payment implementations can be handled through the common Payment abstraction.
+- **Encapsulation:** Grouping data and actions together safely inside a class so outside code cannot mess it up.
+- **Abstraction:** Hiding complex code. The customer just clicks "Pay" and doesn't need to see the complex math happening behind the scenes.
+- **Inheritance:** Creating a general "Payment" category, and letting specific types like "Cash" or "Card" inherit from it.
+- **Polymorphism:** The system can process a payment without knowing if it's UPI or Cash until the exact moment it runs.
 
-📖 **Detailed Documentation:** [OOP Concepts](OOP-Concepts/oop-concepts.md)
+**Detailed Documentation:** [OOP Concepts](OOP-Concepts/oop-concepts.md)
 
 ---
 
-## 🧩 5. SOLID Principles
-SOLID principles are used as design guidelines for creating maintainable classes.
+## 5. SOLID Principles
+SOLID principles are five rules that keep code clean and easy to update.
 
 | Principle | Meaning |
 |---|---|
-| S | Single Responsibility Principle |
-| O | Open/Closed Principle |
-| L | Liskov Substitution Principle |
-| I | Interface Segregation Principle |
-| D | Dependency Inversion Principle |
+| S | Single Responsibility Principle (A class should only have one job). |
+| O | Open/Closed Principle (You can add new features without changing old code). |
+| L | Liskov Substitution Principle (A subclass can easily replace its parent class). |
+| I | Interface Segregation Principle (Don't force classes to use methods they don't need). |
+| D | Dependency Inversion Principle (High-level code should rely on general ideas, not specific details). |
 
-**Examples of separated responsibilities:**
-- `BookingService` ↓ Handles booking workflow
-- `PriceCalculator` ↓ Calculates ticket price
-- `TicketPrinter` ↓ Prints ticket
-- `Payment` ↓ Represents payment abstraction
+**Example of Single Responsibility in our system:**
+- `BookingService` only handles the booking steps.
+- `PriceCalculator` only does math.
+- `TicketPrinter` only prints the ticket.
 
-📖 **Detailed Documentation:** [SOLID Principles](SOLID-Principles/solid-principles.md)
+**Detailed Documentation:** [SOLID Principles](SOLID-Principles/solid-principles.md)
 
 ---
 
-## 🏗️ 6. Class Design
-The major classes identified for the system are:
+## 6. Class Design
+This is where we finalized exactly what each class does.
 
-```text
-Cinema
-Screen
-Seat
-Movie
-Show
-ShowSeat
-Customer
-Booking
-BookingService
-PriceCalculator
-TicketPrinter
-Payment
-  ├── UpiPayment
-  ├── CardPayment
-  └── CashPayment
-```
-
-Each class has a specific responsibility. For example:
-
-| Class | Responsibility |
+| Class | What it does |
 |---|---|
-| Cinema | Represents cinema information |
-| Movie | Represents a movie |
-| Show | Represents a movie show |
-| Screen | Represents a cinema screen |
-| Seat | Represents a physical seat |
-| ShowSeat | Represents seat availability for a show |
-| Customer | Represents the customer |
-| Booking | Represents a completed booking |
-| BookingService | Coordinates booking operations |
-| PriceCalculator | Calculates ticket price |
-| Payment | Represents payment abstraction |
-| TicketPrinter | Prints the booking ticket |
+| Cinema | Holds the screens and movies. |
+| Movie | Stores details about a film. |
+| Screen | A physical hall with seats. |
+| Seat | A physical chair. |
+| Show | A movie playing at a specific time. |
+| Customer | The person buying the ticket. |
+| Booking | The final receipt. |
+| BookingService | Controls the whole booking process. |
+| Payment | A general payment method. |
 
-📖 **Detailed Documentation:** [Class Design](Class-Design/class-design.md)
+**Detailed Documentation:** [Class Design](Class-Design/class-design.md)
 
 ---
 
-## 📐 7. UML Class Diagram
-The UML Class Diagram represents the static structure of the Cinema Booking System.
-
-It shows: Classes, Attributes, Methods, Visibility, Relationships, Multiplicity, Composition, Aggregation, Association, Inheritance, Abstract payment structure.
+## 7. UML Class Diagram
+The UML Class Diagram is a visual blueprint of the system. It shows all the classes, their variables, their actions, and how they connect.
 
 **UML Source:** `UML-Diagram/uml-class-diagram.mmd`
 
-📖 **Detailed Documentation:** [UML Class Diagram](UML-Diagram/uml-class-diagram.md)
+**Detailed Documentation:** [UML Class Diagram](UML-Diagram/uml-class-diagram.md)
 
 ---
 
-## 🔄 8. Sequence Diagram
-The Sequence Diagram represents the dynamic behavior of the system. It shows how objects communicate during a particular operation.
+## 8. Sequence Diagram
+While the UML diagram shows the structure, the Sequence Diagram shows **time**. It shows the exact order in which objects talk to each other when the program is running.
 
-The selected use case is: **Customer books 1 seat and pays using UPI.**
+**Example: Customer books 1 seat and pays using UPI.**
+1. Customer selects a movie and seat.
+2. The System checks if the seat is free.
+3. The Price Calculator determines the cost.
+4. The UPI Payment is processed.
+5. The Booking is saved.
+6. The Ticket is printed.
 
-**Main lifelines:**
-`Customer` `BookingService` `Show` `ShowSeat` `PriceCalculator` `UpiPayment` `Booking` `TicketPrinter`
-
-**Sequence Flow:**
-`Customer` ↓ `BookingService` ↓ `Show` ↓ `ShowSeat` ↓ `PriceCalculator` ↓ `UpiPayment` ↓ `Booking` ↓ `TicketPrinter`
-
-📖 **Detailed Documentation:** [Sequence Diagram](Sequence-Diagram/sequence-diagram.md)
+**Detailed Documentation:** [Sequence Diagram](Sequence-Diagram/sequence-diagram.md)
 
 ---
 
-## 💳 Customer Books 1 Seat and Pays by UPI
-This is the concrete use case represented in the sequence diagram.
-
-**Workflow:**
-1. Customer selects a movie/show
-2. Customer selects one seat
-3. BookingService receives booking request
-4. System checks seat availability
-5. PriceCalculator calculates ticket price
-6. UpiPayment processes payment
-7. Payment succeeds
-8. Booking is created
-9. Ticket is printed
-10. Customer receives confirmation
-
-🖼️ **Project Diagrams:**
+## Project Diagrams
 - [UML Class Diagram](images/UML-diagram.png)
 - [Sequence Diagram](images/squence%20diagram.png)
 - [UPI Booking Sequence](images/Cinema_Booking_UPI_Sequence_Diagram.png)
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```text
 Cinema-Booking-System/
 │
@@ -377,8 +307,8 @@ Cinema-Booking-System/
 
 ---
 
-## ▶️ How to Run
-The project is implemented as a C++ console application.
+## How to Run
+The project is a C++ console application.
 
 **Compile**
 ```bash
@@ -395,67 +325,9 @@ Windows:
 MovieTicketBooking.exe
 ```
 
-Make sure a C++ compiler such as G++ / MinGW is installed and available in your system PATH.
+Make sure a C++ compiler like G++ or MinGW is installed.
 
 ---
 
-## 🔍 Complete Design Flow
-The complete relationship between analysis, design, and implementation is:
-```text
-REQUIREMENTS
-      │
-      ▼
-NOUN-VERB ANALYSIS
-      │
-      ▼
-OBJECT IDENTIFICATION
-      │
-      ▼
-OBJECT RELATIONSHIPS
-      │
-      ▼
-CLASS DESIGN ◄── OOP CONCEPTS
-      ▲      ◄── SOLID PRINCIPLES
-      │
-      ▼
-UML CLASS DIAGRAM
-      │
-      ▼
-SEQUENCE DIAGRAM
-      │
-      ▼
-IMPLEMENTATION
-```
-This demonstrates that implementation is not developed independently. It is the result of a structured analysis and design process.
-
----
-
-## 🎓 Learning Outcomes
-This project provides practical understanding of:
-- Requirements Analysis
-- Noun-Verb Analysis
-- Object Identification
-- Object Relationships
-- Object-Oriented Programming (Encapsulation, Abstraction, Inheritance, Polymorphism)
-- SOLID Principles
-- Low-Level Design
-- Class Responsibility
-- UML Class Modeling
-- Sequence Modeling
-- Object Interaction
-- C++ Implementation
-- Software Documentation
-
----
-
-## 🚀 Key Takeaway
-The main goal of this project is to demonstrate the complete journey from a real-world requirement to a structured software implementation.
-
-`Real-World Problem` ↓ `Requirements` ↓ `Analysis` ↓ `Objects` ↓ `Relationships` ↓ `Class Design` ↓ `OOP + SOLID` ↓ `UML` ↓ `Object Interaction` ↓ `C++ Implementation`
-
-The project therefore demonstrates not only how to write code, but also how to think, analyze, design, model, and then implement a software system.
-
----
-
-## 📌 Conclusion
-The Cinema Booking System is a practical demonstration of software engineering and Low-Level Design using C++. It connects requirements analysis, object modeling, OOP, SOLID principles, class design, UML diagrams, sequence modeling, and implementation into one complete workflow. The project shows how a real-world cinema booking problem can be gradually transformed into a structured, understandable, and maintainable software design.
+## Conclusion
+The Cinema Booking System is a practical demonstration of software engineering. It shows how a real-world problem is gradually turned into a clear, understandable, and maintainable software design using standard analysis, OOP, and SOLID principles.
