@@ -5,7 +5,7 @@
 
 ## Video Demo
 
-https://github.com/Sujalkathait/MovieTicketBookingSystem/raw/main/MovieTicketBookingSystem%20video/project%20demo.mp4
+<video src="MovieTicketBookingSystem%20video/project%20demo.mp4" controls width="100%"></video>
 
 ---
 
