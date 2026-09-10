@@ -6,12 +6,7 @@
 
 ## 🎥 Video Demo
 
-<div align="center">
-  <video src="MovieTicketBookingSystem%20video/project%20demo.mp4" width="100%" controls="controls" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <p>Your browser does not support the video tag.</p>
-    <p>👉 <a href="MovieTicketBookingSystem%20video/project%20demo.mp4">Click here to view the Video Demo directly</a></p>
-  </video>
-</div>
+https://github.com/Sujalkathait/MovieTicketBookingSystem/raw/main/MovieTicketBookingSystem%20video/project%20demo.mp4
 
 ---
 
